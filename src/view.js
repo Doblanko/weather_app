@@ -27,6 +27,7 @@ const View = (() => {
     // the search box
     const searchBox = document.createElement('input');
     searchBox.setAttribute('id', 'search-box');
+    searchBox.setAttribute('type', 'text');
     searchBox.setAttribute('placeholder', 'Enter City');
     searchBox.setAttribute('autocomplete', 'off');
     searchForm.append(searchBox);
@@ -34,7 +35,7 @@ const View = (() => {
     // submit button
     const submitBtn = document.createElement('button');
     submitBtn.innerText = 'Submit';
-    submitBtn.setAttribute('type', 'submit')
+    submitBtn.setAttribute('type', 'button');
     submitBtn.classList.add('button');
     submitBtn.setAttribute('id', 'submit-btn');
     searchForm.append(submitBtn);
@@ -44,9 +45,9 @@ const View = (() => {
     mainContent.append(formContainer);
 
     /* - - - - - Weather Results - - - - - */
-    const weatherResultsContainer = document.createElement('div')
-    weatherResultsContainer.classList.add('weather-results-container')
-    mainContent.append(weatherResultsContainer)
+    const weatherResultsContainer = document.createElement('div');
+    weatherResultsContainer.classList.add('weather-results-container');
+    mainContent.append(weatherResultsContainer);
   };
   return { initializeView };
 })();
