@@ -8,4 +8,5 @@
     // Enable per-language
     "[javascript]": {
         "editor.formatOnSave": true
+    }
 }
