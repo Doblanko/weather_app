@@ -3,10 +3,15 @@ const View = (() => {
   const initializeView = () => {
     /* - - - - - Setup the Basic Containers - - - - - */
     const mainContent = document.querySelector('.main-content');
+    const headerContainer = document.createElement('div');
+    headerContainer.classList.add('header-container');
+
     const titleContainer = document.createElement('div');
     titleContainer.classList.add('title-container');
-    titleContainer.innerText = 'The Weather App';
-    mainContent.append(titleContainer);
+    const title = document.createElement('h1');
+    title.innerText = 'The Weather App';
+    titleContainer.append(title);
+    headerContainer.append(titleContainer);
 
     /* - - - - - Create search Form - - - - - */
     // container for the form
@@ -27,7 +32,8 @@ const View = (() => {
     // the search box
     const searchBox = document.createElement('input');
     searchBox.setAttribute('id', 'search-box');
-    searchBox.setAttribute('type', 'text');
+    searchBox.setAttribute('name', 'search-box');
+    searchBox.setAttribute('type', 'search');
     searchBox.setAttribute('placeholder', 'Enter City');
     searchBox.setAttribute('autocomplete', 'off');
     searchForm.append(searchBox);
@@ -42,14 +48,68 @@ const View = (() => {
 
     formContainer.append(searchForm);
 
-    mainContent.append(formContainer);
+    headerContainer.append(formContainer);
+
+    mainContent.append(headerContainer);
 
     /* - - - - - Weather Results - - - - - */
-    const weatherResultsContainer = document.createElement('div');
-    weatherResultsContainer.classList.add('weather-results-container');
-    mainContent.append(weatherResultsContainer);
+    const weatherContainer = document.createElement('div');
+    weatherContainer.classList.add('weather-container');
+    mainContent.append(weatherContainer);
   };
-  return { initializeView };
+
+  const clearWeatherDataView = () => {
+    document.querySelector('.weather-container').innerHTML = '';
+  };
+
+  const weatherDataView = (weatherData) => {
+    clearWeatherDataView();
+
+    const weatherContainer = document.querySelector(
+      '.weather-container'
+    );
+    const cityNameTitle = document.createElement('h2');
+    cityNameTitle.innerText = weatherData.cityName;
+    weatherContainer.append(cityNameTitle);
+
+    const weatherDataContainer = document.createElement('div')
+    weatherDataContainer.classList.add('weather-data-container')
+
+    const weatherDataContainerLeft = document.createElement('div')
+    weatherDataContainerLeft.classList.add('weather-data-container-left')
+
+    const weatherDataContainerRight = document.createElement('div')
+    weatherDataContainerRight.classList.add('weather-data-container-right')
+
+    const temperature = document.createElement('div')
+    temperature.classList.add('weather-data')
+    temperature.innerHTML = `<strong>Current:</strong> ${weatherData.currTemp} &#176C`
+    weatherDataContainerLeft.append(temperature)
+
+    const high = document.createElement('div')
+    high.classList.add('weather-data')
+    high.innerHTML = `<strong>High:</strong> ${weatherData.tempHigh} &#176C`
+    weatherDataContainerLeft.append(high)
+
+    const low = document.createElement('div')
+    low.classList.add('weather-data')
+    low.innerHTML = `<strong>Low:</strong> ${weatherData.tempLow} &#176C`
+    weatherDataContainerLeft.append(low)
+
+    const wind = document.createElement('div')
+    wind.classList.add('weather-data')
+    wind.innerHTML = `<strong>Wind:</strong> ${weatherData.wind} km/hr ${weatherData.windDir}`
+    weatherDataContainerRight.append(wind)
+
+    weatherDataContainer.append(weatherDataContainerLeft)
+    weatherDataContainer.append(weatherDataContainerRight)
+    weatherContainer.append(weatherDataContainer)
+
+
+    
+  };
+
+  return { initializeView, weatherDataView };
 })();
 
 export default View;

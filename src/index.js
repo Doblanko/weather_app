@@ -1,13 +1,8 @@
+import './styles.css';
 import View from './view';
+import Controller from './controller';
 
-const apiKey = 'af005ed02e107d844f440f72136f435d';
 
-const getWeather = async (city) => {
-  const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${apiKey}`
-  );
-  const weatherData = await response.json();
-};
 
 const App = (() => {
   const initializeApp = () => {
@@ -17,11 +12,14 @@ const App = (() => {
     body.append(mainContent);
 
     View.initializeView();
+    Controller.initializeView();
+
+    // default search
+    Controller.searchWeather('Edmonton')
+
   };
 
   return { initializeApp };
 })();
 
 App.initializeApp();
-
-getWeather('edmonton');
