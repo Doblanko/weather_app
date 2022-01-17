@@ -101,6 +101,11 @@ const View = (() => {
     wind.innerHTML = `<strong>Wind:</strong> ${weatherData.wind} km/hr ${weatherData.windDir}`
     weatherDataContainerRight.append(wind)
 
+    const condition = document.createElement('div')
+    condition.classList.add('weather-data')
+    condition.innerHTML = `<strong>Condition:</strong> ${weatherData.condition}`
+    weatherDataContainerRight.append(condition)
+
     weatherDataContainer.append(weatherDataContainerLeft)
     weatherDataContainer.append(weatherDataContainerRight)
     weatherContainer.append(weatherDataContainer)

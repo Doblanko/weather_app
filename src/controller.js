@@ -2,16 +2,34 @@ import view from './view';
 
 const Controller = (() => {
   const formatData = (weatherData) => {
-    const cityName = weatherData.name
+    const cityName = weatherData.name;
     const currTemp = Math.round(weatherData.main.temp - 273.15);
     const tempHigh = Math.round(weatherData.main.temp_max - 273.15);
     const tempLow = Math.round(weatherData.main.temp_min - 273.15);
     const wind = Math.round(weatherData.wind.speed * 3.6);
-    const windDirOptions = ['N', 'NE', 'NE', 'E', 'E', 'SE', 'SE', 'S', 'S', 'SW', 'SW', 'W', 'W', 'NW', 'NW', 'N']
-    console.log(Math.floor(weatherData.wind.deg/22.5))
-    const windDir = windDirOptions[Math.floor(weatherData.wind.deg/22.5)]
+    const windDirOptions = [
+      'N',
+      'NE',
+      'NE',
+      'E',
+      'E',
+      'SE',
+      'SE',
+      'S',
+      'S',
+      'SW',
+      'SW',
+      'W',
+      'W',
+      'NW',
+      'NW',
+      'N',
+    ];
+    const windDir = windDirOptions[Math.floor(weatherData.wind.deg / 22.5)];
+    // eslint-disable-next-line prefer-destructuring
+    const condition = weatherData.weather[0].description;
 
-    return { cityName, currTemp, tempHigh, tempLow, wind, windDir };
+    return { cityName, currTemp, tempHigh, tempLow, wind, windDir, condition };
   };
 
   const searchWeather = async (city) => {
@@ -20,7 +38,6 @@ const Controller = (() => {
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${apiKey}`
     );
     const weatherData = await response.json();
-    console.log(weatherData)
     view.weatherDataView(formatData(weatherData));
   };
 
