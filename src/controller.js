@@ -25,6 +25,7 @@ const Controller = (() => {
       'NW',
       'N',
     ];
+    // convert the wind direction in degrees to a compass direction
     const windDir = windDirOptions[Math.floor(weatherData.wind.deg / 22.5)];
     // eslint-disable-next-line prefer-destructuring
     const condition = weatherData.weather[0].description;
